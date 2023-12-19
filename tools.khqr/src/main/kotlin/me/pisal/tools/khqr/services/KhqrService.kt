@@ -27,7 +27,7 @@ class KhqrService : IKhqrService {
             is TResult.Failure -> TResult.Failure(emvResult.message, emvResult.code)
             is TResult.Success -> {
                 val khqrResult = BakongKHQR.decode(khqr.qrContent)
-                val responseData = DecodeKhqrResDto(khqrResult, emvResult.data!!)
+                val responseData = DecodeKhqrResDto(khqrResult, emvResult.data!!, khqr.qrContent)
                 TResult.Success(responseData, "KHQR decoded (${khqr.qrContent})", 0)
             }
         }
