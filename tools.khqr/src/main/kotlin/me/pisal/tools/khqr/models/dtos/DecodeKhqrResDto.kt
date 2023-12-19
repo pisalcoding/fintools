@@ -6,5 +6,6 @@ import kh.org.nbc.bakong_khqr.model.KHQRResponse
 
 data class DecodeKhqrResDto(
     val khqrSdkData: KHQRResponse<KHQRDecodeData>,
-    val emvSdkData: PushPaymentData
+    val emvSdkData: PushPaymentData,
+    val text: String
 )
