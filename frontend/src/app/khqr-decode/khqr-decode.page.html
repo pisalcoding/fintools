@@ -1,0 +1,108 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Decode KHQR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Decode KHQR</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4">
+        <ion-card>
+          <ion-card-header>
+            <img class="ion-padding" [src]="imageURL ? imageURL : 'assets/image/sample_khqr.jpg'"
+              class="rounded mx-auto d-block img-thumbnail" alt="HA">
+            <ion-card-title>Upload your KHQR</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <input type="file" hidden="true" (change)="fileChanged($event)" accept="image/*" class="btn filebtn"
+              #fileButton />
+            <ion-button (click)="uploadButtonClicked()"> Upload & Decode </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="8">
+        <ion-card>
+          <ion-card-content>
+            <ion-segment value="KHQR_SDK" [(ngModel)]="resultType">
+              <ion-segment-button value="KHQR_SDK">
+                <ion-label>KHQR SDK</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="EMV_SDK">
+                <ion-label>EMV SDK</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+            <ion-list *ngIf="resultType == 'KHQR_SDK' && khqrData != null && khqrData.data != null">
+              <ion-item detail="false">
+                <ion-label>Bakong account ID</ion-label>
+                <ion-badge slot="end">{{khqrData.data.bakongAccountID}}</ion-badge>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.merchantId}}</ion-badge>
+                <ion-label>Account number or phone number</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.acquiringBank}}</ion-badge>
+                <ion-label>Acquiring bank</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.countryCode}}</ion-badge>
+                <ion-label>Currency</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.transactionAmount}}</ion-badge>
+                <ion-label>Amount</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.merchantName}}</ion-badge>
+                <ion-label>Merchant name</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.merchantCity}}</ion-badge>
+                <ion-label>Merchant city</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.billNumber}}</ion-badge>
+                <ion-label>Bill number</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.mobileNumber}}</ion-badge>
+                <ion-label>Mobile number</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.storeLabel}}</ion-badge>
+                <ion-label>Store label</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.terminalLabel}}</ion-badge>
+                <ion-label>Terminal label</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.merchantType}}</ion-badge>
+                <ion-label>Merchant Type (Tag)</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.timestamp}}</ion-badge>
+                <ion-label>Timpstamp</ion-label>
+              </ion-item>
+              <ion-item detail="false">
+                <ion-badge slot="end">{{khqrData.data.countryCode}}</ion-badge>
+                <ion-label>Country Code</ion-label>
+              </ion-item>
+            </ion-list>
+            <json-editor *ngIf="resultType == 'EMV_SDK' && emvJson != null" [options]="editorOptions" [data]="emvJson"></json-editor>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
