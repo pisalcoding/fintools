@@ -30,4 +30,4 @@ COPY --from=builder /khqr/build/libs/*.jar khqr.jar
 # Run the application
 CMD ["java", "-jar", "khqr.jar"]
 
-HEALTHCHECK --interval=60s --retries=5 --start-period=5s --timeout=10s CMD wget --no-verbose --tries=1 --spider localhost:8082/actuator/health || exit 1
+HEALTHCHECK --interval=60s --retries=5 --start-period=5s --timeout=10s CMD wget --no-verbose --tries=1 --spider localhost:8102/actuator/health || exit 1

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   core:
-    image: tools/main
+    image: tools/core
     build: core
     restart: always
     env_file: ./.env
@@ -14,6 +14,9 @@ services:
     tty: true
     environment:
     - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
+    - SPRING_DATASOURCE_URL=$DB_URL
+    - SPRING_DATASOURCE_USERNAME=$DB_USER
+    - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
   khqr:
     image: tools/khqr
     build: tools.khqr
@@ -27,6 +30,9 @@ services:
     tty: true
     environment:
       - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
+      - SPRING_DATASOURCE_URL=$DB_URL
+      - SPRING_DATASOURCE_USERNAME=$DB_USER
+      - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
   frontend:
     image: tools/frontend
     build: frontend

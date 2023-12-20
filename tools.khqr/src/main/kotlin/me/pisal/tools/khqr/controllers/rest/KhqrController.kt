@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @Validated
 @RequestMapping("api/v1/khqr")
-@CrossOrigin(origins = ["http://localhost:8100"])
+@CrossOrigin(origins = ["http://localhost:8100", "http://172.17.0.1:8100", "http://frontend"])
 class KhqrController(
     private val khqrService: IKhqrService
 ) {

@@ -7,7 +7,6 @@ WORKDIR /opt/frontend
 RUN ionic build --prod
 
 FROM nginx:alpine
-WORKDIR /opt/frontend
-COPY --from=builder www /usr/share/nginx/html
+COPY --from=builder /opt/frontend/www /usr/share/nginx/html
 
 EXPOSE 80

@@ -29,4 +29,4 @@ COPY --from=builder /core/build/libs/*.jar core.jar
 # Run the application
 CMD ["java", "-jar", "core.jar"]
 
-HEALTHCHECK --interval=60s --retries=5 --start-period=5s --timeout=10s CMD wget --no-verbose --tries=1 --spider localhost:8080/actuator/health || exit 1
+HEALTHCHECK --interval=60s --retries=5 --start-period=5s --timeout=10s CMD wget --no-verbose --tries=1 --spider localhost:8101/actuator/health || exit 1
