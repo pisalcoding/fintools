@@ -16,19 +16,19 @@ export class KhqrDecodePage implements OnInit {
 
   imageURL: any;
   resultType: string = "KHQR_SDK";
-  khqrData: KhqrData;
 
   @ViewChild(JsonEditorComponent, { static: false }) 
   editor: JsonEditorComponent;
   editorOptions: JsonEditorOptions;
   emvJson = {};
-
-  khqrjson: string;
+  emvEntries: any;
+  khqrData: KhqrData;
+  qrText: string;
 
   constructor(public httpClient: HttpClient) {
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.mode = 'text';
-    // this.editorOptions.language = "JSON";
+    this.editorOptions.statusBar = false;
   }
 
   ngOnInit() {
@@ -42,8 +42,9 @@ export class KhqrDecodePage implements OnInit {
     this.httpClient.post<KhqrResponse>(url, body).subscribe( res => {
       if (res.data.khqrSdkData.data != null) {
         this.emvJson = res.data.emvSdkData;
-        this.khqrjson = JSON.stringify(res.data.khqrSdkData);
+        this.emvEntries = Object.entries(this.emvJson);
         this.khqrData = res.data.khqrSdkData;
+        this.qrText = res.data.text;
       }
     });
   }
@@ -53,13 +54,13 @@ export class KhqrDecodePage implements OnInit {
   }
 
   fileChanged(event: any) {
-    const files = event.target.files
-    const reader = new FileReader()
+    const files = event.target.files;
+    const reader = new FileReader();
     reader.onload = () => {
-      this.imageURL = reader.result
+      this.imageURL = reader.result;
     }
-    reader.readAsDataURL(event.target.files[0])
-    this.decodeKhqr(event.target.files[0])
+    reader.readAsDataURL(event.target.files[0]);
+    this.decodeKhqr(event.target.files[0]);
   }
   
 }

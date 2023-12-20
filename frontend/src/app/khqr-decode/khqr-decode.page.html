@@ -40,6 +40,9 @@
               <ion-segment-button value="EMV_SDK">
                 <ion-label>EMV SDK</ion-label>
               </ion-segment-button>
+              <ion-segment-button value="QR_TEXT">
+                <ion-label>QR TEXT</ion-label>
+              </ion-segment-button>
             </ion-segment>
             <ion-list *ngIf="resultType == 'KHQR_SDK' && khqrData != null && khqrData.data != null">
               <ion-item detail="false">
@@ -99,7 +102,18 @@
                 <ion-label>Country Code</ion-label>
               </ion-item>
             </ion-list>
-            <json-editor *ngIf="resultType == 'EMV_SDK' && emvJson != null" [options]="editorOptions" [data]="emvJson"></json-editor>
+            <div *ngIf="resultType == 'EMV_SDK' && emvJson != null">
+              <ion-list>
+                <ion-item *ngFor="let item of emvEntries;" detail="false">
+                  <ion-badge slot="end">{{item[1]}}</ion-badge>
+                  <ion-label>{{item[0]}}</ion-label>
+                </ion-item>
+              </ion-list>
+              <!-- <json-editor [options]="editorOptions" [data]="emvJson"></json-editor> -->
+            </div>
+            <div *ngIf="resultType == 'QR_TEXT'">
+              <p>{{qrText}}</p>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
