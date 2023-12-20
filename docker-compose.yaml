@@ -1,30 +1,43 @@
 version: "3.8"
 
 services:
+  core:
+    image: tools/core
+    build: core
+    restart: always
+    env_file: ./.env
+    ports:
+      - 8101:8101
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+    environment:
+    - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
+    - SPRING_DATASOURCE_URL=$DB_URL
+    - SPRING_DATASOURCE_USERNAME=$DB_USER
+    - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
   khqr:
     image: tools/khqr
     build: tools.khqr
     restart: always
     env_file: ./.env
     ports:
-      - 8081:8081
+      - 8102:8102
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
     environment:
       - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
-  tools:
-    depends_on: khqr
-    image: tools/main
-    build: core
-    restart: always
-    env_file: ./.env
+      - SPRING_DATASOURCE_URL=$DB_URL
+      - SPRING_DATASOURCE_USERNAME=$DB_USER
+      - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
+  frontend:
+    image: tools/frontend
+    build: frontend
     ports:
       - $SPRING_HOST_PORT:$SPRING_DOCKER_PORT
+      - '35729:35729'
     volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    environment:
-      - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
+      - ./frontend/:/opt/frontend

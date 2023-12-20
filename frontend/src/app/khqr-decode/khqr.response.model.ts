@@ -5,8 +5,9 @@ export interface KhqrResponse {
 }
 
 export interface KhqrResponseData {
-    khqrSdkData: KhqrData
-    emvSdkData: any
+    khqrSdkData: KhqrData;
+    emvSdkData: any;
+    text: string;
 }
 
 export interface KhqrData {

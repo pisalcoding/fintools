@@ -1,7 +1,7 @@
 # Use a base image with Java and Gradle installed
 FROM gradle:8.5.0-jdk21-alpine AS builder
 # Set the working directory
-WORKDIR /core
+WORKDIR /khqr
 
 # Copy the build.gradle and settings.gradle files
 COPY build.gradle .
@@ -9,6 +9,7 @@ COPY settings.gradle .
 
 # Copy the source code
 COPY src src
+COPY libs libs
 
 # Build the application
 RUN gradle build
@@ -21,12 +22,12 @@ FROM gradle:8.5.0-jdk21-alpine
 RUN apk update && apk add curl
 
 ## Set the working directory
-WORKDIR /core
+WORKDIR /khqr
 
 # Copy the built JAR file from the builder stage
-COPY --from=builder /core/build/libs/*.jar core.jar
+COPY --from=builder /khqr/build/libs/*.jar khqr.jar
 
 # Run the application
-CMD ["java", "-jar", "core.jar"]
+CMD ["java", "-jar", "khqr.jar"]
 
-HEALTHCHECK --interval=60s --retries=5 --start-period=5s --timeout=10s CMD wget --no-verbose --tries=1 --spider localhost:8101/actuator/health || exit 1
+HEALTHCHECK --interval=60s --retries=5 --start-period=5s --timeout=10s CMD wget --no-verbose --tries=1 --spider localhost:8102/actuator/health || exit 1
