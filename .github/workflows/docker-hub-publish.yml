@@ -28,7 +28,7 @@ jobs:
           context: ./core
           file: ./core/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools/core:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools-core:latest
       -
         name: Build and push fintools/khqr
         uses: docker/build-push-action@v5
@@ -36,7 +36,7 @@ jobs:
           context: ./tools.khqr
           file: ./tools.khqr/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools/khqr:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools-khqr:latest
       -
         name: Build and push fintools/frontend
         uses: docker/build-push-action@v5
@@ -44,4 +44,4 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools/frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools-frontend:latest
