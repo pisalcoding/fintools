@@ -8,13 +8,12 @@ name: Docker
 on:
   push:
     branches: [ "master" ]
-    # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: pisalcoding.fintools
 
 
 jobs:
@@ -35,6 +34,6 @@ jobs:
       - name: publish
         uses: pennsignals/publish_docker-compose@v0.1.0
         with:
-          version: '0.1.0'
+          version: 'v0.1.0'
           docker_compose: 'docker-compose.yaml'
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
