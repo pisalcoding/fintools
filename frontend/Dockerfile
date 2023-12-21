@@ -6,7 +6,7 @@ RUN npm uninstall -g ionic
 RUN npm i -g @ionic/cli
 WORKDIR /opt/frontend
 RUN rm -rf www
-# RUN npm i --save @angular/cli
+RUN npm i -D -E @angular/cli
 RUN ionic build --prod
 
 FROM nginx:alpine
