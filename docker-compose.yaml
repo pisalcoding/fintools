@@ -2,43 +2,28 @@ version: "3.8"
 
 services:
   core:
-    image: "core:v0.1.0"
-    container_name: core
-    build: core
+    image: utngypisal/fintools-core:latest
+    container_name: core-service
     restart: always
-    # env_file: ./.env
     ports:
       - 8101:8101
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-    environment:
-    - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
-    - SPRING_DATASOURCE_URL=$DB_URL
-    - SPRING_DATASOURCE_USERNAME=$DB_USER
-    - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
   khqr:
-    image: "khqr:v0.1.0"
-    container_name: khqr
-    build: tools.khqr
+    image: utngypisal/fintools-khqr:latest
+    container_name: khqr-service
     restart: always
-    # env_file: ./.env
     ports:
       - 8102:8102
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-    environment:
-      - SPRING_PROFILES_ACTIVE=$ENVIRONMENT
-      - SPRING_DATASOURCE_URL=$DB_URL
-      - SPRING_DATASOURCE_USERNAME=$DB_USER
-      - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
   frontend:
-    image: "frontend:v0.1.0"
-    container_name: frontend
-    build: frontend
+    image: utngypisal/fintools-frontend:latest
+    container_name: frontend-service
     ports:
       - 8100:80
     volumes:
