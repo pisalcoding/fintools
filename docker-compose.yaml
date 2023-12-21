@@ -38,6 +38,5 @@ services:
     build: frontend
     ports:
       - $SPRING_HOST_PORT:$SPRING_DOCKER_PORT
-      - '35729:35729'
     volumes:
       - ./frontend/:/opt/frontend
