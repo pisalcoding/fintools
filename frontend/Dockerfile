@@ -4,6 +4,7 @@ COPY . /opt/frontend
 
 RUN npm i -g ionic
 WORKDIR /opt/frontend
+RUN rm -rf www
 RUN ionic build --prod
 
 FROM nginx:alpine
