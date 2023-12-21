@@ -22,10 +22,26 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       -
-        name: Build and push
+        name: Build and push fintools/core
         uses: docker/build-push-action@v5
         with:
           context: ./core
           file: ./core/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/core:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools/core:latest
+      -
+        name: Build and push fintools/khqr
+        uses: docker/build-push-action@v5
+        with:
+          context: ./tools.khqr
+          file: ./tools.khqr/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools/khqr:latest
+      -
+        name: Build and push fintools/frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fintools/frontend:latest
