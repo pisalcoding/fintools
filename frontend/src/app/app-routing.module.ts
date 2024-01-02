@@ -10,7 +10,17 @@ const routes: Routes = [
   {
     path: 'khqr-decode',
     loadChildren: () => import('./khqr-decode/khqr-decode.module').then( m => m.KhqrDecodePageModule)
+  },
+  {
+    path: 'evitation',
+    loadChildren: () => import('./evitation/evitation.module').then( m => m.EvitationPageModule)
+  },
+  {
+    path: 'loan-simulator',
+    loadChildren: () => import('./loan-simulator/loan-simulator.module').then( m => m.LoanSimulatorPageModule)
   }
+
+
 ];
 
 @NgModule({
