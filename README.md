@@ -9,7 +9,7 @@
 
 ```
 cd /opt
-sudo git clone https://github.com/pisalcoding/financial-tools.git
+sudo git clone https://github.com/pisalcoding/fintools.git
 cd financial-tools
 sudo docker compose up -d --build
 ```
