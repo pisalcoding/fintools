@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { KHQR_BACKEND_URL, KHQR_DECODE_ENDPOINT } from 'src/configs/config';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { KHQR_BACKEND_PATH, KHQR_DECODE_ENDPOINT } from 'src/configs/config';
 import { KhqrData, KhqrResponse } from './khqr.response.model';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
-
+import { WINDOW } from '../WINDOW_PROVIDERS';
 
 @Component({
   selector: 'app-khqr-decode',
@@ -25,7 +25,10 @@ export class KhqrDecodePage implements OnInit {
   khqrData: KhqrData;
   qrText: string;
 
-  constructor(public httpClient: HttpClient) {
+  constructor(
+    public httpClient: HttpClient, 
+    @Inject(WINDOW) private window: Window
+  ) {
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.mode = 'text';
     this.editorOptions.statusBar = false;
@@ -37,7 +40,8 @@ export class KhqrDecodePage implements OnInit {
   private decodeKhqr(file: File) {
     let body = new FormData();
     body.append('file', file);
-    let url = KHQR_BACKEND_URL + KHQR_DECODE_ENDPOINT;
+    let host = this.window.location.protocol + "//" + this.window.location.hostname
+    let url = host + KHQR_BACKEND_PATH + KHQR_DECODE_ENDPOINT;
 
     this.httpClient.post<KhqrResponse>(url, body).subscribe( res => {
       if (res.data.khqrSdkData.data != null) {
