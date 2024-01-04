@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { WINDOW_PROVIDERS } from './WINDOW_PROVIDERS';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     { 
       provide: RouteReuseStrategy, 
       useClass: IonicRouteStrategy,
-    }
+    },
+    WINDOW_PROVIDERS
   ],
   bootstrap: [AppComponent],
 })
