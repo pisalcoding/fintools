@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile
         "http://frontend",
         "https://fintool.net:8100",
         "https://fintool.net",
-        "http://fintool.net:8100",
+        "http://www.fintool.net",
     ]
 )
 class KhqrController(
