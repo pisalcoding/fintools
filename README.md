@@ -10,6 +10,6 @@
 ```
 cd /opt
 sudo git clone https://github.com/pisalcoding/fintools.git
-cd financial-tools
+cd fintools
 sudo docker compose up -d --build
 ```
