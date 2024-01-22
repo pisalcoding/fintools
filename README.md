@@ -13,5 +13,3 @@ sudo git clone https://github.com/pisalcoding/fintools.git
 cd financial-tools
 sudo docker compose up -d --build
 ```
-
-## 2. Demo: https://fintool.net/
